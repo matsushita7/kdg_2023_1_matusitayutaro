@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<!-- 自分のコメントやアイコン、説明 -->
+{% for profile in profileedit %}
+<img src="{{ profile.images.url }}" class="profile-img">
+<p>{{profile.user}}</p>
+<p>{{profile.text}}</p>
+
+{% if request.user == profile.user %}
+<a href="{% url 'profile-setting' profile.pk %}">
+<button type="submit">編集する</button>
+</a>
+{% else %}
+<p>No</p>
+{% endif %}
+
+{% endfor %}
+{% if comments %}
+        <div class="user_comment_list">
+        <div class="comment_area">
+        <ul>
+            {% for comment in comments %}
+                <li class="user_name">{{ comment.user }}</li>
+                <li class="user_comment">{{ comment.text }}</li>
+                <!-- Replace 'text' with the actual field name you want to display -->
+                {% if request.user == comment.user %}
+                <form method="post" action="{% url 'delete' comment.pk %}">{% csrf_token %}
+                <input type="hidden" name="id" value="{{comment.user}}">
+                <button onclick='return confirm("本当に削除しますか？");'>削除</button>
+                </form>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        </div>
+        </div>
+    {% else %}
+        <p>No comments available for this user.</p>
+    {% endif %}
+    
+
+
+
+{% endblock %}

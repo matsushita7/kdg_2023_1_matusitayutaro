@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>SNS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'sns/css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'sns/css/style.css' %}">
+</head>
+<body>
+    <div class="bunkatu">
+        <div>
+            <nav id="menubar">
+                <header class="header">
+                <div class="navtext-container">
+                    <div class="navtext">カスタマイズ</div>
+                </div>
+                <input type="checkbox" class="menu-btn" id="menu-btn">
+                <label for="menu-btn" class="menu-icon"><span class="navicon"></span></label>
+                    <ul class="menu">
+                        <li><a href="#contact">デフォルト</a></li>
+                        <li><a href="#home">イラスト</a></li>
+                        <li><a href="#skills">ハンドメイド</a></li>
+                        <li><a href="#projects">動画</a></li>
+                        <li><a href="#contact">ゲーム</a></li>
+                        <li><a href="#contact">+カスタマイズ</a></li>
+                    </ul>
+            
+                </header>
+                    <ul class="navlink">
+                        <li class="up"><a href="{% url 'index' %}">ホーム</a></li>
+                        <li class="up"><a href="{% url 'test' %}">検索</a></li>
+                        <li class="up"><a href="recruit.html">通知</a></li>
+                        <li class="up"><a href="company.html">リスト</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li class="up"><a href="{% url 'profile' request.user.id %}">プロフィール</a></li>
+                        {% endif %}
+                        <li class="up"><a href="{% url 'setting' %}">設定</a></li>
+                    </ul>
+                    <ul class="navlink2">
+                        <li class="downn"><a href="{% url 'coment' %}">コメントする</a></li>
+                        <li class="downn"><a href="recruit.html">自分のプロフィールに飛ぶ</a></li>
+                    </ul>
+            </nav>
+        </div>
+        <div class="coment">
+            {% block content %}{% endblock %}
+    <!-- <div class="navbar-nav d-flex flex-row">
+        {% if request.user.is_authenticated %}
+        <a class="nav-link mx-3" href="{% url 'accounts:logout' %}">ログアウト</a>
+        {% else %}
+        <a class="nav-link mx-3" href="{% url 'accounts:login' %}">ログイン</a>
+        <a class="nav-link mx-3" href="{% url 'accounts:signup' %}">会員登録</a>
+        {% endif %}
+    </div> -->
+        </div>
+    </div>
+</body>
+</html>

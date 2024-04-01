@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <label>コメント</label>
+    <input value="{{comment.text}}" readonly>
+    {% if comment.images %}
+    <input value="{{comment.images.url}}" readonly>
+    {% endif %}
+    <p class="coment_text">{{ form.text }}</p>
+    {{ form.images.label_tag }}{{ form.images }}
+    
+    <button type="submit">リプライ</button>
+</form>
+
+{% endblock %}

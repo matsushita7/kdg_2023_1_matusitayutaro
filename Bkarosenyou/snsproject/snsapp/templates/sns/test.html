@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- form←formを送るためにはbuttonが必須。
+GET←POSTに比べてセキュリティが甘い。POSTはユーザーが見ることがほとんどない、内部で秘密にやりとりするもの。methodを設定しない場合デフォルトでGETが入る。
+action←buttonが押されたときにどこにそのデータを送るか、書いておく場所。
+type=""←文字を打つエリアの形式を選ぶ。text,searchなど様々あり、目的に応じて変更する。
+value←デフォルトで表示させたい物を書いたり、編集するときに、前回保存しておいた内容を表示するために書く。
+placeholder←セキュリティを高める役割。例えば名前を入力する欄でHTMLタグを使用できないようにするためのもの。SQLを攻撃されないようにしたりする。 -->
+<form method="get" action="{% url 'test' %}">
+    <input type="search" name="p" value="{{ query }}" placeholder="Search..."> <!--インプットの形式はtextで、その変数名がqとなる（多分） -->
+    <button type="submit">検索</button>
+</form>
+<a href="?p={{ query }}&sort=new">新着順</a><!-- ?p={{ query }}&　これを付け足したことで、いいねを押した後も検索結果が反映されるようになった-->
+<a href="?p={{ query }}&sort=good">いいね順</a>
+<div class="user_comment_list">
+<div class="comment_area">
+{% if commentsort %}
+    <ul>
+        {% for item in commentsort %}
+        <a href="{% url 'detail' item.pk %}">
+        <a href="{% url 'profile' ids=item.user.id %}"><input type="hidden" name="ids" value="{{item.user.id}}"><li class="user_name">{{item.user}}</li></a>
+            <li class="user_comment">{{ item.text }}</li>
+            <!-- Replace 'title' with the actual field name you want to display -->
+            <div class="sentaku">
+                <a href="{% url 'reply' item.pk %}">リプライ</a>
+                <a href="?p={{ query }}&{% url 'evaluation' pk=item.pk %}">{{item.likes}}いいね</a>
+            </div>
+                {% if request.user == item.user %}
+                <form method="post" action="{% url 'delete' item.pk %}">{% csrf_token %}
+                <input type="hidden" name="id" value="{{item.user}}">
+                <button onclick='return confirm("本当に削除しますか？");'>削除</button>
+                </form>
+                {% endif %}
+        {% endfor %}
+        </a>
+    </ul>
+{% else %}
+    <p>No comment found.</p>
+{% endif %}
+
+</div>
+</div>
+{% endblock %}

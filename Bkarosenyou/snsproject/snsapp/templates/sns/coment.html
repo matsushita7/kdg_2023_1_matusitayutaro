@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block content %}
+<form method="post" enctype="multipart/form-data" class="p-4 m-4 bg-light border border-success rounded form-group">{% csrf_token %}
+<div class="coment_content">
+        <p class="coment_text">{{ form.text }}</p><br>
+        <!-- <input type="file"> -->
+        {{ form.images.label_tag }}{{ form.images }}
+        <div class="flex">
+        <p>{{ form.category.label_tag }} {{ form.category }}選択</p>
+        <input type="submit" value="コメント">
+    </div>
+</form>
+
+{% endblock content %}

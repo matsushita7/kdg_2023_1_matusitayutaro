@@ -1,0 +1,252 @@
+body {
+    margin: 0;
+    font-family: "Futura", Helvetica, sans-serif;
+  }
+  
+  /* Navbar & Navmenu color */
+  :root {
+    --background-navbar: rgb(255, 255, 255); /*ハンバーガーメニューの色 */
+  }
+  
+  .header {
+    background: var(--background-navbar);
+    border-radius: 0px;
+    position: fixed;
+    top: 70px;
+    width: 400px;
+    height: 52px;
+  }
+  
+  /* Nav items */
+  .menu {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    margin-top: 52px;
+    padding: 0 0 10px 30px;
+    clear: both;
+    background: var(--background-navbar);
+    transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+    transform: scale(1, 0);
+    transform-origin: top;
+  }
+  
+  /* Hamburger menu button */
+  .menu-btn:checked ~ .menu {
+    transform: scale(1, 1);
+    transform-origin: top;
+    transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  }
+  
+  /* Hamburger menbu text */
+  .menu a {
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 2px;
+    font-size: 20px;
+    text-transform: capitalize;
+    color: #000000;
+    opacity: 0;
+    transition: 0.5s;
+  }
+  
+  .menu li {
+    border-top: 1px solid rgb(255, 255, 255);
+    padding: 20px 0 20px 60px;
+    margin: 0 0px; /*変更元 54px */
+    opacity: 0;
+    transition: 0.5s;
+  }
+  
+  .menu-btn:checked ~ .menu a,
+  .menu-btn:checked ~ .menu li {
+    opacity: 1;
+    transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.2s;
+  }
+  
+  .menu-btn {
+    display: none;
+  }
+  
+  .menu-icon {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding: 24px 14px;
+    margin-left: 25px;
+    -webkit-tap-highlight-color: #000000;
+  }
+  
+  .navicon {
+    background: #000000;
+    display: block;
+    height: 3px;
+    width: 26px;
+    position: relative;
+    transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  }
+  
+  .navicon:before,
+  .navicon:after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: #000000;
+    transition: 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  }
+  
+  .navicon:before {
+    top: 9px;
+  }
+  
+  .navicon:after {
+    bottom: 9px;
+  }
+  
+  /* Hamburger Menu Animation Start */
+  .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+  
+  .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+  
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before {
+    top: 0;
+  }
+  .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    bottom: 0;
+  }
+  
+  .menu-btn:checked ~ .menu-icon .navicon {
+    background: #f8f8f8;
+    transition: 0.2192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+  }
+  /* Hamburger Menu Animation End */
+  
+  /* Navbar Container */
+  .navtext-container {
+    width: 100%;
+    height: 52px;
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Navbar Text */
+  .navtext {
+    position: absolute;
+    text-transform: uppercase;
+    color: #000000;
+    letter-spacing: 4px;
+    font-size: 20px;
+    margin-left: -80px;
+  }
+
+
+
+
+  
+ nav{
+    position: fixed;
+    background-color: rgb(75, 75, 75);
+    width: 400px;
+    height: 100%;
+  }
+ ul{
+    margin-top: 110px;
+}
+ .navlink li{
+    color: #ffffff;
+ }
+ .navlink2{
+    margin-top: 300px;
+
+ }
+ .navlink .up{
+    font-size: 20px;
+    padding: 40px 0 0 90px;
+ }
+ .navlink2 .downn{
+    color:#ffffff;
+    font-size: 20px;
+    padding: 40px 0 0 90px;
+ 
+
+ }
+.bunkatu{
+    display:flex;
+}
+
+.coment{
+    margin-left: 400px;
+}
+
+.coment_text{
+  width: 500px;
+  height: 320px;
+  font-size: 20px;
+}
+.flex{
+  display:flex;
+}
+.coment_content{
+  position: fixed;
+  top: 20%;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  padding: 20px;
+
+}
+.comment_img{
+  width: 600px;/* MAXの高さを決めないといけない */
+  height: 400px;
+
+}
+
+.sentaku{
+  display: flex;
+  justify-content: space-between;
+
+  width: 200px;
+}
+.profile-img{
+  border-radius: 500px;
+  width: 100px;
+  height: 100px;
+}
+
+.comment_area{
+  position: relative;
+  width: 605px;
+
+  border:1px solid #646464;
+}
+
+
+
+.user_name{
+  padding: 4px 20px;
+  border-bottom: 1px solid #b1b1b1;
+  border-top: 1px solid #b1b1b1;
+}
+.user_comment{
+  padding: 20px 40px;
+}
+.usercomment_delete{
+  position:absolute;
+  bottom: 0;
+  right: 0;
+  border: 1px solid #9d3434;
+  margin-left: 500px;
+  font-size: 16px;
+
+}

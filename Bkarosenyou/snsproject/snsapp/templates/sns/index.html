@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="d-flex" action="{% url 'index' %}" method="get">
+    <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+<div class="user_comment_list">
+
+{% for item in object_list %}
+<a href="{% url 'detail' item.pk %}">
+<div class="comment_area">
+
+    <a href="{% url 'profile' ids=item.user.id %}"><input type="hidden" name="ids" value="{{item.user.id}}"><h1 class="user_name">{{item.user}}</h1></a>
+    <!-- このリンクにids=item~~を書くことで、idsという変数に格納し、views.pyでこの変数を使うことができる。inputはおそらく何も意味がない。aタグでh1を囲っているため、名前をクリックするとリンクに飛べる。 -->
+
+
+    <h1 class="user_comment">{{item.text}}</h1>
+    {% if item.images %}
+    <img src="{{ item.images.url }}" class="comment_img">
+    {% endif %}
+    <div class="sentaku">
+        <a href="{% url 'reply' item.pk %}">リプライ</a>
+        <a href="{% url 'evaluation' pk=item.pk %}">{{item.likes}}いいね</a>
+    </div>
+        {% if request.user == item.user %} <!-- 削除のコード -->
+        <form method="post" action="{% url 'delete' item.pk %}">{% csrf_token %}
+            <input type="hidden" name="id" value="{{item.user}}">
+            <button onclick='return confirm("本当に削除しますか？");'>削除</button>
+        </form>
+        {% endif %}
+</div>
+</a>
+{% endfor %}
+</div>
+{% endblock content %}
